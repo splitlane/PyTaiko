@@ -369,5 +369,13 @@
     "ease_in": "quadratic",
     "lock_input": true,
     "comment": "selected diff text fade in"
+  },
+  {
+    "id": 38,
+    "type": "move",
+    "duration": 450,
+    "total_distance": 1280,
+    "ease_in": "quadratic",
+    "comment": "dan transition slide in"
   }
 ]
