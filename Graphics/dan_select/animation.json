@@ -1,5 +1,14 @@
 [
   {
+    "id": 8,
+    "type": "fade",
+    "duration": 183.33,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "delay": 183.33,
+    "comment": "confirmation box fade in"
+  },
+  {
     "id": 9,
     "type": "move",
     "duration": 83.33,

@@ -279,5 +279,15 @@
     ],
     "loop": true,
     "comment": "gogotime/tamashii fire texture change"
+  },
+  {
+    "id": 26,
+    "type": "move",
+    "duration": 533,
+    "delay": 500,
+    "total_distance": 480,
+    "reverse_delay": 1000,
+    "ease_out": "quadratic",
+    "comment": "dan transition"
   }
 ]
