@@ -114,5 +114,19 @@
     "type": "fade",
     "duration": 200,
     "comment": "timer highlight fade out"
+  },
+  {
+    "id": 12,
+    "type": "texture_change",
+    "duration": 300,
+    "textures": [
+      [0.0, 50, 0],
+      [50, 100, 1],
+      [100, 150, 2],
+      [150, 200, 3],
+      [200, 250, 4],
+      [250, 300, 5]
+    ],
+    "comment": "rainbow nameplate animation"
   }
 ]
