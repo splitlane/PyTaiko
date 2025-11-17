@@ -1,0 +1,34 @@
+{
+  "entry_overlay_title": {
+    "x": 155,
+    "y": -10
+  },
+  "entry_overlay_entry": {
+    "x": 0,
+    "y": -10
+  },
+  "chara_entry": {
+    "x": 480,
+    "y": 240
+  },
+  "nameplate_entry": {
+    "x": 500,
+    "y": 185
+  },
+  "nameplate_entry_left": {
+    "x": 30,
+    "y": 640
+  },
+  "nameplate_entry_right": {
+    "x": 950,
+    "y": 640
+  },
+  "indicator_entry_left": {
+    "x": 50,
+    "y": 575
+  },
+  "indicator_entry_right": {
+    "x": 770,
+    "y": 575
+  }
+}
