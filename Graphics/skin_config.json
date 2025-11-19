@@ -1,4 +1,34 @@
 {
+  "nameplate_title_offset": {
+    "x": 14
+  },
+  "nameplate_dan_offset": {
+    "x": 34
+  },
+  "nameplate_text_name": {
+    "x": 136,
+    "y": 24,
+    "width": 255,
+    "font_size": 22
+  },
+  "nameplate_text_title": {
+    "x": 136,
+    "y": -3,
+    "width": 255,
+    "font_size": 20
+  },
+  "indicator_face_offset": {
+    "x": 175
+  },
+  "indicator_kat_offset": {
+    "x": 23
+  },
+  "indicator_don_offset": {
+    "x": 214
+  },
+  "timer_text_margin": {
+    "x": 40
+  },
   "entry_overlay_title": {
     "x": 155,
     "y": -10
@@ -30,5 +60,29 @@
   "indicator_entry_right": {
     "x": 770,
     "y": 575
+  },
+  "entry_drum_offset": {
+    "x": 0,
+    "y": 620
+  },
+  "entry_chara_offset_l": {
+    "x": 170,
+    "y": 570
+  },
+  "entry_chara_offset_r": {
+    "x": 130,
+    "y": 570
+  },
+  "entry_box_text_offset": {
+    "y": 20
+  },
+  "entry_box_highlight_offset": {
+    "x": -15
+  },
+  "entry_box_text": {
+    "font_size": 50
+  },
+  "entry_box_spacing": {
+    "x": 80
   }
 }
