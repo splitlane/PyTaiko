@@ -1,0 +1,437 @@
+{
+  "screen": {
+    "width": 1280,
+    "height": 720
+  },
+  "nameplate_title_offset": {
+    "x": 14
+  },
+  "nameplate_dan_offset": {
+    "x": 34
+  },
+  "nameplate_text_name": {
+    "x": 136,
+    "y": 24,
+    "width": 255,
+    "font_size": 22
+  },
+  "nameplate_text_title": {
+    "x": 136,
+    "y": -3,
+    "width": 255,
+    "font_size": 20
+  },
+  "indicator_face_offset": {
+    "x": 175
+  },
+  "indicator_kat_offset": {
+    "x": 23
+  },
+  "indicator_don_offset": {
+    "x": 214
+  },
+  "timer_text_margin": {
+    "x": 40
+  },
+  "entry_overlay_title": {
+    "x": 155,
+    "y": -10
+  },
+  "entry_overlay_entry": {
+    "x": 0,
+    "y": -10
+  },
+  "chara_entry": {
+    "x": 480,
+    "y": 240
+  },
+  "nameplate_entry": {
+    "x": 500,
+    "y": 185
+  },
+  "nameplate_entry_left": {
+    "x": 30,
+    "y": 640
+  },
+  "nameplate_entry_right": {
+    "x": 950,
+    "y": 640
+  },
+  "indicator_entry_left": {
+    "x": 50,
+    "y": 575
+  },
+  "indicator_entry_right": {
+    "x": 770,
+    "y": 575
+  },
+  "entry_drum_offset": {
+    "x": 0,
+    "y": 620
+  },
+  "entry_chara_offset_l": {
+    "x": 170,
+    "y": 570
+  },
+  "entry_chara_offset_r": {
+    "x": 130,
+    "y": 570
+  },
+  "entry_box_text_offset": {
+    "y": 20
+  },
+  "entry_box_highlight_offset": {
+    "x": -15
+  },
+  "entry_box_text": {
+    "font_size": 50
+  },
+  "entry_box_spacing": {
+    "x": 80
+  },
+  "song_box_name": {
+    "x": 47,
+    "y": 35,
+    "height": 417,
+    "font_size": 40
+  },
+  "song_box_bg": {
+    "width": 32
+  },
+  "song_folder_top": {
+    "x": 268
+  },
+  "song_hori_name": {
+    "x": 48,
+    "y": 107,
+    "width": 300,
+    "font_size": 40
+  },
+  "song_tja_count": {
+    "x": 560,
+    "y": 126,
+    "width": 124,
+    "font_size": 35
+  },
+  "box_texture": {
+    "x": 48,
+    "y": 240
+  },
+  "yb_diff_offset": {
+    "x": 60,
+    "y": -17
+  },
+  "yb_diff_offset_diff_select": {
+    "x": 115,
+    "y": -120
+  },
+  "yb_diff_offset_crown": {
+    "x": 8,
+    "y": -20
+  },
+  "yb_name": {
+    "x": 30,
+    "y": 35,
+    "height": 417
+  },
+  "yb_subtitle": {
+    "x": -15,
+    "y": 10,
+    "height": 410,
+    "font_size": 30
+  },
+  "boxes": {
+    "y": 95
+  },
+  "song_select_indicator": {
+    "x": 410,
+    "y": 575
+  },
+  "song_select_chara_1p": {
+    "x": -50,
+    "y": 410
+  },
+  "song_select_chara_2p": {
+    "x": 950,
+    "y": 410
+  },
+  "song_select_nameplate_1p": {
+    "x": 30,
+    "y": 640
+  },
+  "song_select_nameplate_2p": {
+    "x": 950,
+    "y": 640
+  },
+  "song_select_offset": {
+    "x": -370
+  },
+  "selector_offset": {
+    "x": 115
+  },
+  "selector_balloon_offset_1": {
+    "x": -220
+  },
+  "selector_balloon_offset_2": {
+    "x": 70
+  },
+  "transition_title": {
+    "y": 1156,
+    "font_size": 40
+  },
+  "transition_subtitle": {
+    "y": 1206,
+    "font_size": 30
+  },
+  "transition_offset": {
+    "y": 816
+  },
+  "transition_chara_offset": {
+    "y": 408
+  },
+  "dan_title": {
+    "x": 665,
+    "y": 127,
+    "height": 400,
+    "font_size": 40
+  },
+  "dan_subtitle": {
+    "x": 620,
+    "y": 525,
+    "height": 400,
+    "font_size": 30
+  },
+  "total_notes_counter_margin": {
+    "x": 25
+  },
+  "exam_box_offset": {
+    "y": 83
+  },
+  "exam_gauge_offset": {
+    "x": -8
+  },
+  "exam_counter_margin": {
+    "x": 20
+  },
+  "dan_yellow_box_offset": {
+    "x": 140
+  },
+  "dan_level_counter_margin": {
+    "x": 10
+  },
+  "dan_hori_name": {
+    "x": 434,
+    "y": 84,
+    "width": 275
+  },
+  "genre_bg_offset": {
+    "x": 150
+  },
+  "genre_bg_offset_2": {
+    "x": 1400
+  },
+  "genre_bg_offset_3": {
+    "x": 100
+  },
+  "genre_bg_left_max": {
+    "x": -56
+  },
+  "genre_bg_extra_distance": {
+    "x": 155,
+    "width": 75
+  },
+  "genre_bg_folder_background": {
+    "x": -18,
+    "width": 75
+  },
+  "genre_bg_folder_background_folder": {
+    "x": 20,
+    "y": -2,
+    "width": -10
+  },
+  "genre_bg_folder_edge": {
+    "x": 80
+  },
+  "diff_sort_star_num": {
+    "y": -143
+  },
+  "genre_bg_title": {
+    "y": -60,
+    "width": 300
+  },
+  "score_info_bg_offset": {
+    "y": 50
+  },
+  "score_info_counter_margin": {
+    "x": 24,
+    "width": 14
+  },
+  "dan_result_info_height": {
+    "y": 191
+  },
+  "dan_result_song_name": {
+    "x": 1230,
+    "y": 90
+  },
+  "dan_result_diff_num_margin": {
+    "x": 12
+  },
+  "dan_result_hori_name": {
+    "x": 276,
+    "y": 123,
+    "width": 275
+  },
+  "dan_game_hori_name": {
+    "x": 154,
+    "y": 392,
+    "width": 275
+  },
+  "dan_score_box_margin": {
+    "x": 22
+  },
+  "dan_total_notes_margin": {
+    "x": 45
+  },
+  "dan_exam_info": {
+    "width": 940,
+    "x": 22,
+    "y": 94
+  },
+  "dan_result_nameplate": {
+    "x": 10,
+    "y": 585
+  },
+  "dan_result_chara": {
+    "x": 0,
+    "y": 405
+  },
+  "dan_select_indicator": {
+    "x": 410,
+    "y": 575
+  },
+  "dan_select_chara_1p": {
+    "x": -50,
+    "y": 410
+  },
+  "dan_select_chara_2p": {
+    "x": 950,
+    "y": 410
+  },
+  "dan_select_nameplate_1p": {
+    "x": 30,
+    "y": 640
+  },
+  "dan_select_nameplate_2p": {
+    "x": 950,
+    "y": 640
+  },
+  "notes": {
+    "y": 192
+  },
+  "moji": {
+    "x": 148,
+    "y": 323
+  },
+  "practice_progress_bar_width": {
+    "width": 890
+  },
+  "moji_drumroll": {
+    "x": 60,
+    "y": 190,
+    "width": 116
+  },
+  "drumroll_width_offset": {
+    "width": -47
+  },
+  "past_judge_circle": {
+    "x": 236
+  },
+  "balloon_offset": {
+    "x": 12
+  },
+  "balloon_pause_position": {
+    "x": 349
+  },
+  "game_nameplate_1p": {
+    "x": -62,
+    "y": 371
+  },
+  "game_nameplate_2p": {
+    "x": -62,
+    "y": 285
+  },
+  "game_2p_offset": {
+    "y": 536
+  },
+  "2p_offset": {
+    "y": 176
+  },
+  "gauge_hit_effect_note": {
+    "x": 1158,
+    "y": 101,
+    "height": 403
+  },
+  "drumroll_counter_margin": {
+    "x": 52
+  },
+  "kusudama_counter_margin": {
+    "x": 150
+  },
+  "combo_margin": {
+    "x": 30,
+    "y": 35
+  },
+  "score_counter_margin": {
+    "x": 20
+  },
+  "song_info": {
+    "x": 1252,
+    "y": 50,
+    "font_size": 40
+  },
+  "judge_counter_margin": {
+    "x": 23
+  },
+  "judge_counter_1": {
+    "x": 260,
+    "y": 440
+  },
+  "judge_counter_2": {
+    "x": 180,
+    "y": 477
+  },
+  "judge_counter_3": {
+    "x": 270,
+    "y": 477
+  },
+  "judge_counter_4": {
+    "x": 515,
+    "y": 388,
+    "width": 577
+  },
+  "song_info_result": {
+    "x": 1252,
+    "y": 35,
+    "font_size": 40
+  },
+  "result_score_margin": {
+    "x": 21
+  },
+  "result_2p_offset": {
+    "y": -288
+  },
+  "result_chara": {
+    "y": 100
+  },
+  "result_nameplate": {
+    "x": 265,
+    "y": 80,
+    "height": 300
+  },
+  "result_flowers_offset": {
+    "x": 792
+  },
+  "high_score_indicator_margin": {
+    "x": 14
+  }
+}

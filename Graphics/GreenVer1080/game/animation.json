@@ -1,0 +1,1089 @@
+[
+  {
+    "id": 0,
+    "type": "fade",
+    "duration": 150,
+    "delay": 83,
+    "initial_opacity": 0.5,
+    "comment": "lane hit effect fade out"
+  },
+  {
+    "id": 1,
+    "type": "fade",
+    "duration": 100,
+    "delay": 67,
+    "comment": "drum hit effect fade out"
+  },
+  {
+    "id": 2,
+    "type": "texture_change",
+    "duration": 116.67,
+    "textures": [
+      [
+        0,
+        33.33,
+        0
+      ],
+      [
+        33.33,
+        66.66,
+        1
+      ],
+      [
+        66.66,
+        116.67,
+        2
+      ]
+    ],
+    "comment": "gauge hit effect texture change"
+  },
+  {
+    "id": 3,
+    "type": "fade",
+    "duration": 366,
+    "delay": 3332,
+    "reverse_delay": 3332,
+    "loop": true,
+    "comment": "song name/number fade in/out"
+  },
+  {
+    "id": 4,
+    "type": "text_stretch",
+    "duration": 50,
+    "comment": "score counter text stretch"
+  },
+  {
+    "id": 5,
+    "type": "text_stretch",
+    "duration": 50,
+    "comment": "combo text stretch"
+  },
+  {
+    "id": 6,
+    "type": "text_stretch",
+    "duration": 50,
+    "comment": "balloon counter text stretch"
+  },
+  {
+    "id": 7,
+    "type": "fade",
+    "duration": 166,
+    "comment": "balloon counter fade out"
+  },
+  {
+    "id": 8,
+    "type": "fade",
+    "duration": 166,
+    "delay": 2532,
+    "comment": "drumroll counter fade out"
+  },
+  {
+    "id": 9,
+    "type": "text_stretch",
+    "duration": 50,
+    "comment": "drumroll counter text stretch"
+  },
+  {
+    "id": 10,
+    "type": "fade",
+    "duration": 450,
+    "comment": "gauge up fade effect"
+  },
+  {
+    "id": 11,
+    "type": "move",
+    "duration": 250,
+    "total_distance": 1080.0,
+    "ease_out": "quadratic",
+    "comment": "kusudama move down"
+  },
+  {
+    "id": 12,
+    "type": "move",
+    "duration": 83.33,
+    "total_distance": 150.0,
+    "delay": {
+      "reference_id": 11,
+      "property": "duration"
+    },
+    "ease_in": "quadratic",
+    "comment": "kusudama move up"
+  },
+  {
+    "id": 13,
+    "type": "move",
+    "duration": 116.67,
+    "total_distance": 420.0,
+    "ease_out": "quadratic",
+    "delay": {
+      "init_val": {
+        "reference_id": 11,
+        "property": "duration"
+      },
+      "reference_id": 12,
+      "property": "duration"
+    },
+    "comment": "kusudama renda move up"
+  },
+  {
+    "id": 14,
+    "type": "fade",
+    "duration": 83.33,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "delay": {
+      "init_val": {
+        "reference_id": 11,
+        "property": "duration"
+      },
+      "reference_id": 12,
+      "property": "duration"
+    },
+    "comment": "kusudama renda fade in"
+  },
+  {
+    "id": 15,
+    "type": "text_stretch",
+    "duration": 50,
+    "comment": "kusudama counter text stretch"
+  },
+  {
+    "id": 16,
+    "type": "texture_resize",
+    "duration": 100,
+    "reverse_delay": 100,
+    "initial_size": 1.0,
+    "final_size": 1.05,
+    "comment": "kusudama breathing"
+  },
+  {
+    "id": 17,
+    "type": "move",
+    "duration": 500,
+    "reverse_delay": 0,
+    "total_distance": 60.0,
+    "loop": true,
+    "comment": "renda breathing"
+  },
+  {
+    "id": 18,
+    "type": "move",
+    "duration": 116.67,
+    "total_distance": 60.0,
+    "delay": {
+      "init_val": {
+        "reference_id": 13,
+        "property": "duration"
+      },
+      "reference_id": 13,
+      "property": "delay"
+    },
+    "ease_out": "quadratic",
+    "comment": "kusudama renda move down"
+  },
+  {
+    "id": 19,
+    "type": "texture_change",
+    "duration": 401,
+    "textures": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        100,
+        1
+      ],
+      [
+        100,
+        200,
+        2
+      ],
+      [
+        200,
+        300,
+        3
+      ],
+      [
+        300,
+        400,
+        4
+      ]
+    ],
+    "comment": "kusudama open"
+  },
+  {
+    "id": 20,
+    "type": "fade",
+    "duration": 200,
+    "comment": "kusudama renda fade out"
+  },
+  {
+    "id": 21,
+    "type": "fade",
+    "duration": 150,
+    "delay": 666,
+    "comment": "kusudama fade out"
+  },
+  {
+    "id": 22,
+    "type": "texture_change",
+    "duration": 87,
+    "textures": [
+      [
+        0.0,
+        8.335,
+        0
+      ],
+      [
+        8.335,
+        16.67,
+        1
+      ],
+      [
+        16.67,
+        25.005000000000003,
+        2
+      ],
+      [
+        25.005000000000003,
+        33.34,
+        3
+      ],
+      [
+        33.34,
+        41.675000000000004,
+        4
+      ],
+      [
+        41.675000000000004,
+        50.010000000000005,
+        5
+      ],
+      [
+        50.010000000000005,
+        58.345000000000006,
+        6
+      ],
+      [
+        58.345000000000006,
+        66.68,
+        7
+      ],
+      [
+        66.68,
+        75.01500000000001,
+        8
+      ],
+      [
+        75.01500000000001,
+        83.35000000000001,
+        9
+      ],
+      [
+        83.35000000000001,
+        91.685,
+        10
+      ],
+      [
+        91.685,
+        100.02000000000001,
+        11
+      ],
+      [
+        100.02000000000001,
+        108.35500000000002,
+        12
+      ]
+    ],
+    "comment": "balloon explosion effect"
+  },
+  {
+    "id": 23,
+    "type": "texture_change",
+    "duration": 500,
+    "textures": [
+      [
+        0.0,
+        16.67,
+        0
+      ],
+      [
+        16.67,
+        33.34,
+        1
+      ],
+      [
+        33.34,
+        50,
+        2
+      ],
+      [
+        50,
+        66.68,
+        3
+      ],
+      [
+        66.68,
+        83.35,
+        4
+      ],
+      [
+        83.35,
+        100.02,
+        5
+      ],
+      [
+        100.02,
+        116.69000000000001,
+        6
+      ],
+      [
+        116.69000000000001,
+        133.36,
+        7
+      ],
+      [
+        133.36,
+        150.03000000000003,
+        8
+      ],
+      [
+        150.03000000000003,
+        166.70000000000002,
+        9
+      ],
+      [
+        166.70000000000002,
+        183.37,
+        10
+      ],
+      [
+        183.37,
+        200.04000000000002,
+        11
+      ],
+      [
+        200.04000000000002,
+        216.71000000000004,
+        12
+      ],
+      [
+        216.71000000000004,
+        233.38000000000002,
+        13
+      ],
+      [
+        233.38000000000002,
+        250.05,
+        14
+      ],
+      [
+        250.05,
+        266.72,
+        15
+      ],
+      [
+        266.72,
+        283.39000000000004,
+        16
+      ],
+      [
+        283.39000000000004,
+        300.06000000000006,
+        17
+      ],
+      [
+        300.06000000000006,
+        316.73,
+        18
+      ],
+      [
+        316.73,
+        333.40000000000003,
+        19
+      ],
+      [
+        333.40000000000003,
+        350.07000000000005,
+        20
+      ],
+      [
+        350.07000000000005,
+        366.74,
+        21
+      ],
+      [
+        366.74,
+        383.41,
+        22
+      ],
+      [
+        383.41,
+        400.08000000000004,
+        23
+      ],
+      [
+        400.08000000000004,
+        416.75000000000006,
+        24
+      ],
+      [
+        416.75000000000006,
+        433.4200000000001,
+        25
+      ],
+      [
+        433.4200000000001,
+        450.09000000000003,
+        26
+      ],
+      [
+        450.09000000000003,
+        466.76000000000005,
+        27
+      ],
+      [
+        466.76000000000005,
+        483.43000000000006,
+        28
+      ],
+      [
+        483.43000000000006,
+        500,
+        29
+      ]
+    ],
+    "comment": "gogotime bottom explosion"
+  },
+  {
+    "id": 24,
+    "type": "texture_resize",
+    "duration": 66.68,
+    "initial_size": 1.0,
+    "final_size": 2.0,
+    "reverse_delay": 0,
+    "comment": "gogotime fire resize"
+  },
+  {
+    "id": 25,
+    "type": "texture_change",
+    "duration": 400,
+    "textures": [
+      [
+        0.0,
+        49.989999999999995,
+        0
+      ],
+      [
+        49.989999999999995,
+        99.97999999999999,
+        1
+      ],
+      [
+        99.97999999999999,
+        149.96999999999997,
+        2
+      ],
+      [
+        149.96999999999997,
+        199.95999999999998,
+        3
+      ],
+      [
+        199.95999999999998,
+        249.95,
+        4
+      ],
+      [
+        249.95,
+        299.93999999999994,
+        5
+      ],
+      [
+        299.93999999999994,
+        349.92999999999995,
+        6
+      ],
+      [
+        349.92999999999995,
+        399.91999999999996,
+        7
+      ]
+    ],
+    "loop": true,
+    "comment": "gogotime/tamashii fire texture change"
+  },
+  {
+    "id": 26,
+    "type": "move",
+    "duration": 533,
+    "delay": 500,
+    "total_distance": 720.0,
+    "reverse_delay": 1000,
+    "ease_out": "quadratic",
+    "comment": "dan transition"
+  },
+  {
+    "id": 27,
+    "type": "fade",
+    "duration": 132,
+    "initial_opacity": 0.5,
+    "delay": 100,
+    "comment": "judgment fade 1"
+  },
+  {
+    "id": 28,
+    "type": "fade",
+    "duration": 82.7,
+    "delay": 233.3,
+    "comment": "judgment fade 2"
+  },
+  {
+    "id": 29,
+    "type": "move",
+    "duration": 83,
+    "total_distance": 22.5,
+    "start_position": 216.0,
+    "comment": "judgment move"
+  },
+  {
+    "id": 30,
+    "type": "texture_change",
+    "duration": 100,
+    "textures": [
+      [
+        33,
+        50,
+        0
+      ],
+      [
+        50,
+        83,
+        1
+      ],
+      [
+        83,
+        98,
+        2
+      ],
+      [
+        98,
+        100,
+        3
+      ]
+    ],
+    "comment": "judgment texture change"
+  },
+  {
+    "id": 31,
+    "type": "fade",
+    "duration": 133,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "delay": 16.67,
+    "comment": "gauge hit effect circle fadein"
+  },
+  {
+    "id": 32,
+    "type": "texture_resize",
+    "duration": 233,
+    "delay": {
+      "reference_id": 2,
+      "property": "duration"
+    },
+    "initial_size": 0.75,
+    "final_size": 1.15,
+    "comment": "gauge hit effect resize"
+  },
+  {
+    "id": 33,
+    "type": "fade",
+    "duration": 66,
+    "delay": 233,
+    "comment": "gauge hit fadeout"
+  },
+  {
+    "id": 34,
+    "type": "fade",
+    "duration": 300,
+    "delay": 116.67,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "comment": "gauge hit rotation"
+  },
+  {
+    "id": 35,
+    "type": "fade",
+    "duration": 50,
+    "delay": 0,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "comment": "score counter fade animation 1"
+  },
+  {
+    "id": 36,
+    "type": "move",
+    "duration": 80,
+    "delay": 0,
+    "total_distance": -30.0,
+    "start_position": 262.5,
+    "comment": "score counter move animation 1"
+  },
+  {
+    "id": 37,
+    "type": "fade",
+    "duration": 80,
+    "delay": 366.74,
+    "initial_opacity": 1.0,
+    "final_opacity": 0.0,
+    "comment": "score counter fade animation 2"
+  },
+  {
+    "id": 38,
+    "type": "move",
+    "duration": 66,
+    "delay": 80,
+    "total_distance": 7.5,
+    "start_position": 217.5,
+    "comment": "score counter move animation 2"
+  },
+  {
+    "id": 39,
+    "type": "move",
+    "duration": 66,
+    "delay": 279.36,
+    "total_distance": -3.0,
+    "start_position": 219.0,
+    "comment": "score counter move animation 3"
+  },
+  {
+    "id": 40,
+    "type": "move",
+    "duration": 80,
+    "delay": 366.74,
+    "total_distance": 15.0,
+    "start_position": 222.0,
+    "comment": "score counter move animation 4"
+  },
+  {
+    "id": 41,
+    "type": "move",
+    "duration": 100,
+    "delay": 0,
+    "total_distance": 30.0,
+    "start_position": 0.0,
+    "ease_out": "quadratic",
+    "comment": "branch indicator diff down"
+  },
+  {
+    "id": 42,
+    "type": "move",
+    "duration": 133,
+    "delay": 100,
+    "total_distance": 105.0,
+    "start_position": 0.0,
+    "ease_out": "quadratic",
+    "comment": "branch indicator diff up"
+  },
+  {
+    "id": 43,
+    "type": "fade",
+    "duration": 133,
+    "delay": 100,
+    "initial_opacity": 1.0,
+    "final_opacity": 0.0,
+    "comment": "branch indicator diff fade"
+  },
+  {
+    "id": 44,
+    "type": "fade",
+    "duration": 116,
+    "delay": 0,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "reverse_delay": 1160,
+    "comment": "branch indicator level fade"
+  },
+  {
+    "id": 45,
+    "type": "texture_resize",
+    "duration": 116,
+    "delay": 0,
+    "initial_size": 1.0,
+    "final_size": 1.2,
+    "reverse_delay": 0,
+    "comment": "branch indicator level scale"
+  },
+  {
+    "id": 46,
+    "type": "fade",
+    "duration": 150,
+    "delay": 0,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "comment": "fail animation bachio fade in"
+  },
+  {
+    "id": 47,
+    "type": "texture_change",
+    "duration": 266.67,
+    "delay": {
+      "reference_id": 46,
+      "property": "duration"
+    },
+    "textures": [
+      [
+        0,
+        150,
+        0
+      ],
+      [
+        150,
+        266.67,
+        1
+      ]
+    ],
+    "comment": "fail animation bachio texture change"
+  },
+  {
+    "id": 48,
+    "type": "texture_change",
+    "duration": 500,
+    "delay": {
+      "reference_id": 47,
+      "property": "duration"
+    },
+    "textures": [
+      [
+        0,
+        495,
+        0
+      ],
+      [
+        495,
+        500,
+        1
+      ]
+    ],
+    "comment": "fail animation bachio fall"
+  },
+  {
+    "id": 49,
+    "type": "move",
+    "duration": 116.67,
+    "delay": {
+      "reference_id": 46,
+      "property": "duration"
+    },
+    "total_distance": 225.0,
+    "start_position": 0.0,
+    "ease_out": "quadratic",
+    "comment": "fail animation bachio move out"
+  },
+  {
+    "id": 50,
+    "type": "fade",
+    "duration": 66.67,
+    "delay": {
+      "init_val": {
+        "reference_id": 46,
+        "property": "duration"
+      },
+      "reference_id": 49,
+      "property": "duration"
+    },
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "reverse_delay": 0,
+    "comment": "fail animation bachio boom fade in"
+  },
+  {
+    "id": 51,
+    "type": "texture_resize",
+    "duration": 133.34,
+    "delay": {
+      "init_val": {
+        "reference_id": 46,
+        "property": "duration"
+      },
+      "reference_id": 49,
+      "property": "duration"
+    },
+    "initial_size": 0.5,
+    "final_size": 1.0,
+    "comment": "fail animation bachio boom scale"
+  },
+  {
+    "id": 52,
+    "type": "move",
+    "duration": 416.67,
+    "delay": {
+      "init_val": {
+        "reference_id": 46,
+        "property": "duration"
+      },
+      "reference_id": 49,
+      "property": "duration"
+    },
+    "total_distance": 90.0,
+    "start_position": 0.0,
+    "ease_out": "quadratic",
+    "comment": "fail animation bachio up"
+  },
+  {
+    "id": 53,
+    "type": "move",
+    "duration": 100,
+    "delay": {
+      "init_val": {
+        "init_val": {
+          "reference_id": 46,
+          "property": "duration"
+        },
+        "reference_id": 49,
+        "property": "duration"
+      },
+      "reference_id": 52,
+      "property": "duration"
+    },
+    "total_distance": 90.0,
+    "start_position": 0.0,
+    "ease_out": "quadratic",
+    "comment": "fail animation bachio down"
+  },
+  {
+    "id": 54,
+    "type": "fade",
+    "duration": 283.33,
+    "delay": {
+      "init_val": {
+        "init_val": 208.335,
+        "reference_id": 46,
+        "property": "duration"
+      },
+      "reference_id": 49,
+      "property": "duration"
+    },
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "comment": "fail animation text fade in"
+  },
+  {
+    "id": 55,
+    "type": "texture_change",
+    "duration": 200,
+    "textures": [
+      [
+        0,
+        50,
+        0
+      ],
+      [
+        50,
+        100,
+        1
+      ],
+      [
+        100,
+        150,
+        2
+      ],
+      [
+        150,
+        200,
+        3
+      ]
+    ],
+    "delay": {
+      "init_val": 100,
+      "reference_id": 47,
+      "property": "duration"
+    }
+  },
+  {
+    "id": 56,
+    "type": "fade",
+    "duration": 183,
+    "delay": 450,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "reverse_delay": 0,
+    "comment": "clear highlight fade in"
+  },
+  {
+    "id": 57,
+    "type": "move",
+    "duration": 133,
+    "delay": {
+      "init_val": 450,
+      "reference_id": 55,
+      "property": "duration"
+    },
+    "total_distance": 30.0,
+    "start_position": 0.0,
+    "reverse_delay": 216.67,
+    "ease_out": "quadratic",
+    "comment": "fc highlight up"
+  },
+  {
+    "id": 58,
+    "type": "fade",
+    "duration": 133,
+    "delay": 0,
+    "initial_opacity": 1.0,
+    "final_opacity": 0.0,
+    "comment": "fc highlight fade out"
+  },
+  {
+    "id": 59,
+    "type": "move",
+    "duration": 700,
+    "delay": 0,
+    "total_distance": 225.0,
+    "start_position": 0.0,
+    "ease_in": "quadratic",
+    "ease_out": "quadratic",
+    "comment": "bachio move out 2"
+  },
+  {
+    "id": 60,
+    "type": "move",
+    "duration": 350,
+    "delay": 0,
+    "total_distance": 225.0,
+    "start_position": 0.0,
+    "reverse_delay": 0,
+    "ease_in": "quadratic",
+    "comment": "bachio move up"
+  },
+  {
+    "id": 61,
+    "type": "fade",
+    "duration": 183,
+    "delay": 0,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "comment": "fan fade in"
+  },
+  {
+    "id": 62,
+    "type": "texture_change",
+    "duration": 100,
+    "delay": {
+      "reference_id": 61,
+      "property": "duration"
+    },
+    "textures": [
+      [
+        0,
+        16.67,
+        0
+      ],
+      [
+        16.67,
+        33.33,
+        1
+      ],
+      [
+        33.33,
+        50,
+        2
+      ],
+      [
+        50,
+        66.67,
+        3
+      ],
+      [
+        66.67,
+        83.33,
+        4
+      ],
+      [
+        83.33,
+        100,
+        5
+      ]
+    ],
+    "comment": "fan texture change"
+  },
+  {
+    "id": 63,
+    "type": "fade",
+    "duration": 450,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "comment": "gauge rainbow fade in"
+  },
+  {
+    "id": 64,
+    "type": "texture_change",
+    "duration": 400.08,
+    "delay": 0,
+    "textures": [
+      [
+        0,
+        50.01,
+        0
+      ],
+      [
+        50.01,
+        100.02,
+        1
+      ],
+      [
+        100.02,
+        150.03,
+        2
+      ],
+      [
+        150.03,
+        200.04,
+        3
+      ],
+      [
+        200.04,
+        250.05,
+        4
+      ],
+      [
+        250.05,
+        300.06,
+        5
+      ],
+      [
+        300.06,
+        350.07,
+        6
+      ],
+      [
+        350.07,
+        400.08,
+        7
+      ]
+    ],
+    "loop": true,
+    "comment": "gauge rainbow animation"
+  },
+  {
+    "id": 65,
+    "type": "fade",
+    "duration": 100,
+    "comment": "combo announce fade out"
+  },
+  {
+    "id": 66,
+    "type": "move",
+    "duration": 116.67,
+    "delay": {
+      "reference_id": 46,
+      "property": "duration"
+    },
+    "total_distance": 300.0,
+    "ease_out": "quadratic",
+    "comment": "clear animation bachio move out"
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "id": 8,
+    "type": "fade",
+    "duration": 183.33,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "delay": 183.33,
+    "comment": "confirmation box fade in"
+  },
+  {
+    "id": 9,
+    "type": "move",
+    "duration": 83.33,
+    "start_position": 892.5,
+    "total_distance": -228.0,
+    "delay": 83.33,
+    "comment": "yellow box left out"
+  },
+  {
+    "id": 10,
+    "type": "move",
+    "duration": 83.33,
+    "start_position": 987.0,
+    "total_distance": 217.5,
+    "delay": 83.33,
+    "comment": "yellow box right out"
+  },
+  {
+    "id": 11,
+    "type": "move",
+    "duration": 83.33,
+    "start_position": 48.0,
+    "total_distance": 450.0,
+    "delay": 83.33,
+    "comment": "yellow box center out"
+  },
+  {
+    "id": 12,
+    "type": "fade",
+    "duration": 83.33,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "delay": 83.33,
+    "comment": "yellow box fade in"
+  },
+  {
+    "id": 13,
+    "type": "move",
+    "duration": 116.67,
+    "start_position": 664.5,
+    "total_distance": -319.5,
+    "comment": "yellow box left out 2"
+  },
+  {
+    "id": 14,
+    "type": "move",
+    "duration": 116.67,
+    "start_position": 1204.5,
+    "total_distance": 316.5,
+    "comment": "yellow box right out 2"
+  },
+  {
+    "id": 15,
+    "type": "move",
+    "duration": 116.67,
+    "start_position": 483.0,
+    "total_distance": 634.5,
+    "comment": "yellow box center out 2"
+  },
+  {
+    "id": 16,
+    "type": "move",
+    "duration": 133.33,
+    "start_position": 144.0,
+    "total_distance": -93.0,
+    "delay": {
+      "reference_id": 13,
+      "property": "duration"
+    },
+    "comment": "yellow box top out"
+  },
+  {
+    "id": 17,
+    "type": "move",
+    "duration": 133.33,
+    "start_position": 633.0,
+    "total_distance": 90.0,
+    "delay": {
+      "reference_id": 13,
+      "property": "duration"
+    },
+    "comment": "yellow box center h out"
+  },
+  {
+    "id": 18,
+    "type": "fade",
+    "duration": 116.67,
+    "initial_opacity": 0.0,
+    "final_opacity": 1.0,
+    "delay": {
+      "init_val": {
+        "init_val": 16.67,
+        "reference_id": 16,
+        "property": "duration"
+      },
+      "reference_id": 13,
+      "property": "duration"
+    },
+    "comment": "yellow box fade in 2"
+  }
+]
