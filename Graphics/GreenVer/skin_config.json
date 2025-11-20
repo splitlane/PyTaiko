@@ -433,5 +433,50 @@
   },
   "high_score_indicator_margin": {
     "x": 14
+  },
+  "diff_sort_stat_num_star": {
+    "x": 70,
+    "y": -108
+  },
+  "diff_sort_margin_1": {
+    "x": 25
+  },
+  "diff_sort_margin_2": {
+    "x": 23
+  },
+  "diff_sort_margin_3": {
+    "x": 10
+  },
+  "diff_sort_offset": {
+    "x": 100
+  },
+  "diff_sort_offset_2": {
+    "x": 245
+  },
+  "neiro_text": {
+    "x": 235,
+    "y": 1000,
+    "font_size": 50
+  },
+  "neiro_counter_margin": {
+    "x": 20
+  },
+  "option_p2": {
+    "x": 800
+  },
+  "option_text_in": {
+    "x": 100
+  },
+  "modifier_text": {
+    "x": 330,
+    "y": 819,
+    "font_size": 30
+  },
+  "modifier_offset": {
+    "y": 50
+  },
+  "modifier_offset_2": {
+    "x": 92,
+    "y": 110
   }
 }
