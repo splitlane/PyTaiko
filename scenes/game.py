@@ -586,6 +586,12 @@ class Player:
                 # current_ms = self.bpmchange.hit_ms
                 time_diff = note.load_ms - hit_ms
                 note.load_ms = time_diff / bpmchange + hit_ms
+                
+                time_diff = note.load_ms_x - hit_ms
+                note.load_ms_x = time_diff / bpmchange + hit_ms
+                
+                time_diff = note.load_ms_y - hit_ms
+                note.load_ms_y = time_diff / bpmchange + hit_ms
 
                 note.pixels_per_frame_x *= bpmchange
                 note.pixels_per_frame_y *= bpmchange
@@ -1098,6 +1104,8 @@ class Player:
                 delay = self.delay_end - self.delay_start
                 for note in chain(self.don_notes, self.kat_notes, self.other_notes, self.current_bars, self.draw_bar_list):
                     note.load_ms += delay
+                    note.load_ms_x += delay
+                    note.load_ms_y += delay
                 self.delay_start = None
                 self.delay_end = None
         self.update_bpm(ms_from_start)
