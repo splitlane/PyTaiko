@@ -59,6 +59,7 @@ class Judgments(IntEnum):
 
 class GameScreen(Screen):
     JUDGE_X = 414 * tex.screen_scale
+    JUDGE_Y = 256 * tex.screen_scale
     def on_screen_start(self):
         super().on_screen_start()
         self.mask_shader = ray.load_shader("shader/outline.vs", "shader/mask.fs")
@@ -134,7 +135,7 @@ class GameScreen(Screen):
 
     def init_tja(self, song: Path):
         """Initialize the TJA file"""
-        self.tja = TJAParser(song, start_delay=self.start_delay, distance=tex.screen_width - GameScreen.JUDGE_X)
+        self.tja = TJAParser(song, start_delay=self.start_delay, screen_width=tex.screen_width, screen_height=tex.screen_height, initial_judge_pos_x=GameScreen.JUDGE_X, initial_judge_pos_y=GameScreen.JUDGE_Y)
         if self.tja.metadata.bgmovie != Path() and self.tja.metadata.bgmovie.exists():
             self.movie = VideoPlayer(self.tja.metadata.bgmovie)
             self.movie.set_volume(0.0)
@@ -473,23 +474,30 @@ class Player:
         """Returns the score, good count, ok count, bad count, max combo, and total drumroll"""
         return self.score, self.good_count, self.ok_count, self.bad_count, self.max_combo, self.total_drumroll
 
-    def get_position_x(self, width: int, current_ms: float, load_ms: float, pixels_per_frame: float) -> int:
+    def get_position_x(self, current_ms: float, note: Note) -> int:
         """Calculates the x-coordinate of a note based on its load time and current time"""
         # Override if delay active
         if self.delay_start:
             current_ms = self.delay_start
-        time_diff = load_ms - current_ms
-        return int(width + pixels_per_frame * 0.06 * time_diff - (tex.textures["notes"]["1"].width//2)) - self.visual_offset
+        # Calculation
+        if note.pixels_per_frame_x == 0:
+            return int(GameScreen.JUDGE_X) # TODO: add judgement position
+        time_diff = note.load_ms_x - current_ms
+        screen_edge_x = tex.screen_width if note.pixels_per_frame_x >= 0 else 0
+        return int(screen_edge_x + note.pixels_per_frame_x * 0.06 * time_diff - (tex.textures["notes"]["1"].width//2)) - self.visual_offset
 
-    def get_position_y(self, current_ms: float, load_ms: float, pixels_per_frame: float, pixels_per_frame_x) -> int:
+    def get_position_y(self, current_ms: float, note: Note) -> int:
         """Calculates the y-coordinate of a note based on its load time and current time"""
         # Override if delay active
         if self.delay_start:
             current_ms = self.delay_start
-        time_diff = load_ms - current_ms
-        if pixels_per_frame_x == 0:
-            return int(pixels_per_frame * 0.06 * time_diff)
-        return int((pixels_per_frame * 0.06 * time_diff) + ((self.tja.distance * pixels_per_frame) / pixels_per_frame_x))
+        # Calculation
+        if note.pixels_per_frame_y == 0:
+            return int(0) # TODO: add judgement position
+        time_diff = note.load_ms_y - current_ms
+        # NEEDS FIXING
+        screen_edge_y = tex.screen_height-GameScreen.JUDGE_Y if note.pixels_per_frame_y >= 0 else -GameScreen.JUDGE_Y
+        return int(screen_edge_y + note.pixels_per_frame_y * 0.06 * time_diff - (tex.textures["notes"]["1"].width//2)) - self.visual_offset
 
     def handle_tjap3_extended_commands(self, current_ms: float):
         if not self.timeline or self.timeline_index >= len(self.timeline):
@@ -634,7 +642,7 @@ class Player:
         removal_threshold = GameScreen.JUDGE_X + (650 * tex.screen_scale)
         bars_to_keep = []
         for bar in self.current_bars:
-            position = self.get_position_x(tex.screen_width, current_ms, bar.hit_ms, bar.pixels_per_frame_x)
+            position = self.get_position_x(current_ms, bar)
             if position >= removal_threshold:
                 bars_to_keep.append(bar)
         self.current_bars = bars_to_keep
@@ -1151,15 +1159,15 @@ class Player:
 
     def draw_drumroll(self, current_ms: float, head: Drumroll, current_eighth: int):
         """Draws a drumroll in the player's lane"""
-        start_position = self.get_position_x(tex.screen_width, current_ms, head.load_ms, head.pixels_per_frame_x)
+        start_position = self.get_position_x(current_ms, head)
         start_position += self.judge_x
         tail = next((note for note in self.current_notes_draw[1:] if note.type == NoteType.TAIL and note.index > head.index), self.current_notes_draw[1])
         is_big = int(head.type == NoteType.ROLL_HEAD_L)
-        end_position = self.get_position_x(tex.screen_width, current_ms, tail.load_ms, tail.pixels_per_frame_x)
+        end_position = self.get_position_x(current_ms, tail)
         end_position += self.judge_x
         length = end_position - start_position
         color = ray.Color(255, head.color, head.color, 255)
-        y = tex.skin_config["notes"].y + self.get_position_y(current_ms, head.load_ms, head.pixels_per_frame_y, head.pixels_per_frame_x)
+        y = tex.skin_config["notes"].y + self.get_position_y(current_ms, head)
         moji_y = tex.skin_config["moji"].y
         moji_x = -(tex.textures["notes"]["moji"].width//2) + (tex.textures["notes"]["1"].width//2)
         if head.display:
@@ -1178,13 +1186,13 @@ class Player:
     def draw_balloon(self, current_ms: float, head: Balloon, current_eighth: int):
         """Draws a balloon in the player's lane"""
         offset = tex.skin_config["balloon_offset"].x
-        start_position = self.get_position_x(tex.screen_width, current_ms, head.load_ms, head.pixels_per_frame_x)
+        start_position = self.get_position_x(current_ms, head)
         start_position += self.judge_x
         tail = next((note for note in self.current_notes_draw[1:] if note.type == NoteType.TAIL and note.index > head.index), self.current_notes_draw[1])
-        end_position = self.get_position_x(tex.screen_width, current_ms, tail.load_ms, tail.pixels_per_frame_x)
+        end_position = self.get_position_x(current_ms, tail)
         end_position += self.judge_x
         pause_position = tex.skin_config["balloon_pause_position"].x + self.judge_x
-        y = tex.skin_config["notes"].y + self.get_position_y(current_ms, head.load_ms, head.pixels_per_frame_y, head.pixels_per_frame_x)
+        y = tex.skin_config["notes"].y + self.get_position_y(current_ms, head)
         if current_ms >= tail.hit_ms:
             position = end_position
         elif current_ms >= head.hit_ms:
@@ -1203,8 +1211,8 @@ class Player:
         for bar in reversed(self.current_bars):
             if not bar.display:
                 continue
-            x_position = self.get_position_x(tex.screen_width, current_ms, bar.load_ms, bar.pixels_per_frame_x)
-            y_position = self.get_position_y(current_ms, bar.load_ms, bar.pixels_per_frame_y, bar.pixels_per_frame_x)
+            x_position = self.get_position_x(current_ms, bar)
+            y_position = self.get_position_y(current_ms, bar)
             x_position += self.judge_x
             y_position += self.judge_y
             if hasattr(bar, 'is_branch_start'):
@@ -1245,11 +1253,11 @@ class Player:
                 else:
                     effective_ms = current_ms
 
-                x_position = self.get_position_x(tex.screen_width, effective_ms, note.load_ms, note.pixels_per_frame_x)
-                y_position = self.get_position_y(effective_ms, note.load_ms, note.pixels_per_frame_y, note.pixels_per_frame_x)
+                x_position = self.get_position_x(effective_ms, note)
+                y_position = self.get_position_y(effective_ms, note)
             else:
-                x_position = self.get_position_x(tex.screen_width, current_ms, note.load_ms, note.pixels_per_frame_x)
-                y_position = self.get_position_y(current_ms, note.load_ms, note.pixels_per_frame_y, note.pixels_per_frame_x)
+                x_position = self.get_position_x(current_ms, note)
+                y_position = self.get_position_y(current_ms, note)
             x_position += self.judge_x
             y_position += self.judge_y
             if isinstance(note, Drumroll):

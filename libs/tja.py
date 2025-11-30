@@ -90,6 +90,7 @@ class Note:
         type (int): The type (color) of the note.
         hit_ms (float): The time at which the note should be hit.
         load_ms (float): The time at which the note should be loaded.
+        load_ms_x, load_ms_y (float): The time at which the note should be loaded, if only the (x or y) component of the scroll was used.
         pixels_per_frame_x (float): The number of pixels per frame in the x direction.
         pixels_per_frame_y (float): The number of pixels per frame in the y direction.
         display (bool): Whether the note should be displayed.
@@ -102,6 +103,8 @@ class Note:
     type: int = field(init=False)
     hit_ms: float = field(init=False)
     load_ms: float = field(init=False)
+    load_ms_x: float = field(init=False)
+    load_ms_y: float = field(init=False)
     pixels_per_frame_x: float = field(init=False)
     pixels_per_frame_y: float = field(init=False)
     display: bool = field(init=False)
@@ -355,7 +358,8 @@ class TJAParser:
     Args:
         path (Path): The path to the TJA file.
         start_delay (int): The delay in milliseconds before the first note.
-        distance (int): The distance between notes.
+        screen_width, screen_height (float): The screen width and height.
+        initial_judge_pos_x, initial_judge_pos_y (float): The judge position (coordinates for center of judgement circle texture on screen)
 
     Attributes:
         metadata (TJAMetadata): The metadata extracted from the TJA file.
@@ -363,14 +367,15 @@ class TJAParser:
         data (list): The data extracted from the TJA file.
     """
     DIFFS = {0: "easy", 1: "normal", 2: "hard", 3: "oni", 4: "edit", 5: "tower", 6: "dan"}
-    def __init__(self, path: Path, start_delay: int = 0, distance: float = 866):
+    def __init__(self, path: Path, start_delay: float = 0, screen_width: float = 1280, screen_height: float = 720, initial_judge_pos_x: float = 414, initial_judge_pos_y: float = 256):
         """
         Initialize a TJA object.
 
         Args:
             path (Path): The path to the TJA file.
             start_delay (int): The delay in milliseconds before the first note.
-            distance (int): The distance between notes.
+            screen_width, screen_height (float): The screen width and height.
+            initial_judge_pos_x, initial_judge_pos_y (float): The judge position (coordinates for center of judgement circle texture on screen)
         """
         self.file_path: Path = path
 
@@ -384,7 +389,11 @@ class TJAParser:
         logger.debug(f"Parsing TJA file: {self.file_path}")
         self.get_metadata()
 
-        self.distance = distance
+        self.screen_width = screen_width
+        self.screen_height = screen_height
+        self.initial_judge_pos_x = initial_judge_pos_x
+        self.initial_judge_pos_y = initial_judge_pos_y
+
         self.current_ms: float = start_delay
 
     def get_metadata(self):
@@ -809,6 +818,45 @@ class TJAParser:
         delay_current = 0
         delay_last_note_ms = self.current_ms
 
+        # Mutates note.load_ms, note.pixels_per_frame_x, pixels_per_frame_y
+        # Depends on state variables: bpm, time_signature, x_scroll_modifier, y_scroll_modifier, judge_pos_x, judge_pos_y
+        # Depends on hit_ms!!! SET note.hit_ms FIRST!!! BEFORE calling this.
+        def attach_scroll(note):
+            # distance between note hit position (judgement circle) and note initial loading position, depends on which direction the note is coming from (scroll)
+            judge_pos_x = self.initial_judge_pos_x
+            judge_pos_y = self.initial_judge_pos_y
+            distance_x = (self.screen_width - judge_pos_x) if x_scroll_modifier >= 0 else judge_pos_x
+            distance_y = judge_pos_y if y_scroll_modifier >= 0 else (self.screen_height - judge_pos_y)
+
+            # note.pixels_per_frame_x = get_pixels_per_frame(bpm * time_signature * x_scroll_modifier, time_signature*4, distance_x)
+            # note.pixels_per_frame_y = get_pixels_per_frame(bpm * time_signature * y_scroll_modifier, time_signature*4, distance_y)
+            note.pixels_per_frame_x = get_pixels_per_frame(bpm * time_signature * x_scroll_modifier, time_signature*4, 866)
+            note.pixels_per_frame_y = get_pixels_per_frame(bpm * time_signature * y_scroll_modifier, time_signature*4, 866)
+            
+            pixels_per_ms_x = get_pixels_per_ms(note.pixels_per_frame_x)
+            pixels_per_ms_y = get_pixels_per_ms(note.pixels_per_frame_y)
+
+            if note.pixels_per_frame_x == 0:
+                if note.pixels_per_frame_y == 0:
+                    # Since both scrolls are 0, it should be loaded from the start
+                    note.load_ms = 0
+                    note.load_ms_x = note.load_ms
+                    note.load_ms_y = note.load_ms
+                else:
+                    note.load_ms_x = 0
+                    note.load_ms_y = note.hit_ms - (distance_y / abs(pixels_per_ms_y))
+                    note.load_ms = note.load_ms_y
+            else:
+                if note.pixels_per_frame_y == 0:
+                    note.load_ms_x = note.hit_ms - (distance_x / abs(pixels_per_ms_x))
+                    note.load_ms_y = 0
+                    note.load_ms = note.load_ms_x
+                else:
+                    # Use smaller load_ms between x, y directions
+                    note.load_ms_x = note.hit_ms - (distance_x / abs(pixels_per_ms_x))
+                    note.load_ms_y = note.hit_ms - (distance_y / abs(pixels_per_ms_y))
+                    note.load_ms = min(note.load_ms_x, note.load_ms_y)
+
         for bar in notes:
             bar_length = sum(len(part) for part in bar if '#' not in part)
             barline_added = False
@@ -1094,15 +1142,8 @@ class TJAParser:
                             bar_list[section_index].branch_params = branch_params
                         elif bar_list == []:
                             bar_line = Note()
-                            bar_line.pixels_per_frame_x = get_pixels_per_frame(bpm * time_signature * x_scroll_modifier, time_signature*4, self.distance)
-                            bar_line.pixels_per_frame_y = get_pixels_per_frame(bpm * time_signature * y_scroll_modifier, time_signature*4, self.distance)
-                            pixels_per_ms = get_pixels_per_ms(bar_line.pixels_per_frame_x)
-
                             bar_line.hit_ms = self.current_ms
-                            if pixels_per_ms == 0:
-                                bar_line.load_ms = bar_line.hit_ms
-                            else:
-                                bar_line.load_ms = bar_line.hit_ms - (self.distance / pixels_per_ms)
+                            attach_scroll(bar_line)
                             bar_line.type = 0
                             bar_line.display = False
                             bar_line.gogo_time = gogo_time
@@ -1240,11 +1281,20 @@ class TJAParser:
                     if scroll_type != ScrollType.BMSCROLL:
                         scroll_value = part[7:]
                         if 'i' in scroll_value:
+                            # TODO: rewrite with more lenient parser
                             normalized = scroll_value.replace('.i', 'j').replace('i', 'j')
                             normalized = normalized.replace(',', '')
                             c = complex(normalized)
                             x_scroll_modifier = c.real
                             y_scroll_modifier = c.imag
+                        elif ',' in scroll_value:
+                            # Polar scroll
+                            # (r),(div),(n)
+                            args = scroll_value.split(',')
+                            radius = float(args[0])
+                            theta = math.radians(float(args[2]) / float(args[1]) * 360)
+                            x_scroll_modifier = -radius*math.cos(theta)
+                            y_scroll_modifier = radius*math.sin(theta)
                         else:
                             x_scroll_modifier = float(scroll_value)
                             y_scroll_modifier = 0.0
@@ -1313,16 +1363,8 @@ class TJAParser:
 
                 ms_per_measure = get_ms_per_measure(bpm, time_signature)
                 bar_line = Note()
-
-                bar_line.pixels_per_frame_x = get_pixels_per_frame(bpm * time_signature * x_scroll_modifier, time_signature*4, self.distance)
-                bar_line.pixels_per_frame_y = get_pixels_per_frame(bpm * time_signature * y_scroll_modifier, time_signature*4, self.distance)
-                pixels_per_ms = get_pixels_per_ms(max(bar_line.pixels_per_frame_x, bar_line.pixels_per_frame_y))
-
                 bar_line.hit_ms = self.current_ms
-                if pixels_per_ms == 0:
-                    bar_line.load_ms = bar_line.hit_ms
-                else:
-                    bar_line.load_ms = bar_line.hit_ms - (self.distance / pixels_per_ms)
+                attach_scroll(bar_line)
                 bar_line.type = 0
                 bar_line.display = barline_display
                 bar_line.gogo_time = gogo_time
@@ -1372,11 +1414,7 @@ class TJAParser:
                     delay_last_note_ms = self.current_ms
                     note.hit_ms = self.current_ms
                     note.display = True
-                    note.pixels_per_frame_x = bar_line.pixels_per_frame_x
-                    note.pixels_per_frame_y = bar_line.pixels_per_frame_y
-                    pixels_per_ms = get_pixels_per_ms(max(note.pixels_per_frame_x, note.pixels_per_frame_y))
-                    note.load_ms = (note.hit_ms if pixels_per_ms == 0
-                                    else note.hit_ms - (self.distance / pixels_per_ms))
+                    attach_scroll(note)
                     note.type = int(item)
                     note.index = index
                     note.gogo_time = gogo_time
@@ -1402,12 +1440,7 @@ class TJAParser:
                     elif item == '8':
                         if prev_note is None:
                             raise ValueError("No previous note found")
-                        new_pixels_per_ms = max(prev_note.pixels_per_frame_x, prev_note.pixels_per_frame_y) / (1000 / 60)
-                        if new_pixels_per_ms == 0:
-                            note.load_ms = note.hit_ms
-                        else:
-                            note.load_ms = note.hit_ms - (self.distance / new_pixels_per_ms)
-                        note.pixels_per_frame_x = prev_note.pixels_per_frame_x
+                        # Allows complex scroll
 
                     self.current_ms += increment
                     curr_note_list.append(note)
@@ -1440,22 +1473,23 @@ class TJAParser:
 
         return n.hexdigest()
 
+# TODO: fix, it wouldn't work with BPMCHANGE or DELAY for BMS/HBSCROLL, too naive approach
 def modifier_speed(notes: NoteList, value: float):
     """Modifies the speed of the notes in the given NoteList."""
     modded_notes = notes.draw_notes.copy()
     modded_bars = notes.bars.copy()
-    for note in modded_notes:
-        note.pixels_per_frame_x *= value
-        pixels_per_ms = get_pixels_per_ms(note.pixels_per_frame_x)
-        if pixels_per_ms == 0:
-            continue
-        note.load_ms = note.hit_ms - (866 * global_tex.screen_scale / pixels_per_ms)
-    for bar in modded_bars:
-        bar.pixels_per_frame_x *= value
-        pixels_per_ms = get_pixels_per_ms(bar.pixels_per_frame_x)
-        if pixels_per_ms == 0:
-            continue
-        bar.load_ms = bar.hit_ms - (866 * global_tex.screen_scale / pixels_per_ms)
+    # for note in modded_notes:
+    #     note.pixels_per_frame_x *= value
+    #     pixels_per_ms = get_pixels_per_ms(note.pixels_per_frame_x)
+    #     if pixels_per_ms == 0:
+    #         continue
+    #     note.load_ms = note.hit_ms - (866 * global_tex.screen_scale / pixels_per_ms)
+    # for bar in modded_bars:
+    #     bar.pixels_per_frame_x *= value
+    #     pixels_per_ms = get_pixels_per_ms(bar.pixels_per_frame_x)
+    #     if pixels_per_ms == 0:
+    #         continue
+    #     bar.load_ms = bar.hit_ms - (866 * global_tex.screen_scale / pixels_per_ms)
     return modded_notes, modded_bars
 
 def modifier_display(notes: NoteList):
