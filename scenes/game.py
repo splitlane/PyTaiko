@@ -481,7 +481,7 @@ class Player:
             current_ms = self.delay_start
         # Calculation
         if note.pixels_per_frame_x == 0:
-            return int(GameScreen.JUDGE_X) # TODO: add judgement position
+            return int(GameScreen.JUDGE_X - (tex.textures["notes"]["1"].width//2)) - self.visual_offset # TODO: add judgement position
         time_diff = note.load_ms_x - current_ms
         screen_edge_x = tex.screen_width if note.pixels_per_frame_x >= 0 else 0
         return int(screen_edge_x + note.pixels_per_frame_x * 0.06 * time_diff - (tex.textures["notes"]["1"].width//2)) - self.visual_offset
@@ -493,11 +493,11 @@ class Player:
             current_ms = self.delay_start
         # Calculation
         if note.pixels_per_frame_y == 0:
-            return int(0) # TODO: add judgement position
+            return int(GameScreen.JUDGE_Y - (tex.textures["notes"]["1"].height//2)) - self.visual_offset # TODO: add judgement position
         time_diff = note.load_ms_y - current_ms
-        # NEEDS FIXING
-        screen_edge_y = tex.screen_height-GameScreen.JUDGE_Y if note.pixels_per_frame_y >= 0 else -GameScreen.JUDGE_Y
-        return int(screen_edge_y + note.pixels_per_frame_y * 0.06 * time_diff - (tex.textures["notes"]["1"].width//2)) - self.visual_offset
+        pixels_per_frame_y = -note.pixels_per_frame_y # Flipped
+        screen_edge_y = tex.screen_height if pixels_per_frame_y >= 0 else 0
+        return int(screen_edge_y + pixels_per_frame_y * 0.06 * time_diff - (tex.textures["notes"]["1"].width//2)) - self.visual_offset
 
     def handle_tjap3_extended_commands(self, current_ms: float):
         if not self.timeline or self.timeline_index >= len(self.timeline):
@@ -1167,7 +1167,7 @@ class Player:
         end_position += self.judge_x
         length = end_position - start_position
         color = ray.Color(255, head.color, head.color, 255)
-        y = tex.skin_config["notes"].y + self.get_position_y(current_ms, head)
+        y = self.get_position_y(current_ms, head)
         moji_y = tex.skin_config["moji"].y
         moji_x = -(tex.textures["notes"]["moji"].width//2) + (tex.textures["notes"]["1"].width//2)
         if head.display:
@@ -1192,7 +1192,7 @@ class Player:
         end_position = self.get_position_x(current_ms, tail)
         end_position += self.judge_x
         pause_position = tex.skin_config["balloon_pause_position"].x + self.judge_x
-        y = tex.skin_config["notes"].y + self.get_position_y(current_ms, head)
+        y = self.get_position_y(current_ms, head)
         if current_ms >= tail.hit_ms:
             position = end_position
         elif current_ms >= head.hit_ms:
@@ -1223,7 +1223,7 @@ class Player:
                 angle = math.degrees(math.atan2(bar.pixels_per_frame_y, bar.pixels_per_frame_x))
             else:
                 angle = 0
-            tex.draw_texture('notes', str(bar.type), frame=frame, x=x_position+tex.skin_config["moji_drumroll"].x, y=y_position+tex.skin_config["moji_drumroll"].y+(self.is_2p*tex.skin_config["2p_offset"].y), rotation=angle)
+            tex.draw_texture('notes', str(bar.type), frame=frame, x=x_position+tex.skin_config["moji_drumroll"].x, y=y_position+(tex.skin_config["moji_drumroll"].y-tex.skin_config["notes"].y)+(self.is_2p*tex.skin_config["2p_offset"].y), rotation=angle)
 
 
     def draw_notes(self, current_ms: float, start_ms: float):
@@ -1264,11 +1264,11 @@ class Player:
                 self.draw_drumroll(current_ms, note, current_eighth)
             elif isinstance(note, Balloon) and not note.is_kusudama:
                 self.draw_balloon(current_ms, note, current_eighth)
-                tex.draw_texture('notes', 'moji', frame=note.moji, x=x_position, y=tex.skin_config["moji"].y + y_position+(self.is_2p*tex.skin_config["2p_offset"].y))
+                tex.draw_texture('notes', 'moji', frame=note.moji, x=x_position, y=(tex.skin_config["moji"].y-tex.skin_config["notes"].y) + y_position+(self.is_2p*tex.skin_config["2p_offset"].y))
             else:
                 if note.display:
-                    tex.draw_texture('notes', str(note.type), frame=current_eighth % 2, x=x_position, y=y_position+tex.skin_config["notes"].y+(self.is_2p*tex.skin_config["2p_offset"].y), center=True)
-                tex.draw_texture('notes', 'moji', frame=note.moji, x=x_position - (tex.textures["notes"]["moji"].width//2) + (tex.textures["notes"]["1"].width//2), y=tex.skin_config["moji"].y + y_position+(self.is_2p*tex.skin_config["2p_offset"].y))
+                    tex.draw_texture('notes', str(note.type), frame=current_eighth % 2, x=x_position, y=y_position+(self.is_2p*tex.skin_config["2p_offset"].y), center=True)
+                tex.draw_texture('notes', 'moji', frame=note.moji, x=x_position - (tex.textures["notes"]["moji"].width//2) + (tex.textures["notes"]["1"].width//2), y=(tex.skin_config["moji"].y-tex.skin_config["notes"].y) + y_position+(self.is_2p*tex.skin_config["2p_offset"].y))
 
         ray.draw_text(self.current_notes_draw[0].lyric, tex.screen_width//2 - (ray.measure_text(self.current_notes_draw[0].lyric, int(40 * tex.screen_scale))//2), tex.screen_height - int(50 * tex.screen_scale), int(40 * tex.screen_scale), ray.BLUE)
 
